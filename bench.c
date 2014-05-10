@@ -4,8 +4,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int countCodePoints(const uint8_t* s, size_t* count);
-int optCountCodePoints(const uint8_t* s, size_t* count);
+int bjorn1CountCodePoints(const uint8_t* s, size_t* count);
+int bjorn2CountCodePoints(const uint8_t* s, size_t* count);
 int cmpArithCountCodePoints(const uint8_t *s, size_t *count);
 int cmpBranchCountCodePoints(const uint8_t *s, size_t *count);
 int vimCountCodePoints(const uint8_t* s, size_t* count);
@@ -55,8 +55,8 @@ char *readf(const char *fname) {
 int main() {
     char *buf = readf("text.txt");
 
-    BENCH("multibyte: ", (uint8_t *) buf, countCodePoints);
-    BENCH("multibyte: ", (uint8_t *) buf, optCountCodePoints);
+    BENCH("multibyte: ", (uint8_t *) buf, bjorn1CountCodePoints);
+    BENCH("multibyte: ", (uint8_t *) buf, bjorn2CountCodePoints);
     BENCH("multibyte: ", (uint8_t *) buf, cmpArithCountCodePoints);
     BENCH("multibyte: ", (uint8_t *) buf, cmpBranchCountCodePoints);
     BENCH("multibyte: ", (uint8_t *) buf, vimCountCodePoints);
@@ -65,8 +65,8 @@ int main() {
 
     buf = readf("normal.txt");
 
-    BENCH("ascii:     ", (uint8_t *) buf, countCodePoints);
-    BENCH("ascii:     ", (uint8_t *) buf, optCountCodePoints);
+    BENCH("ascii:     ", (uint8_t *) buf, bjorn1CountCodePoints);
+    BENCH("ascii:     ", (uint8_t *) buf, bjorn2CountCodePoints);
     BENCH("ascii:     ", (uint8_t *) buf, cmpArithCountCodePoints);
     BENCH("ascii:     ", (uint8_t *) buf, cmpBranchCountCodePoints);
     BENCH("ascii:     ", (uint8_t *) buf, vimCountCodePoints);
