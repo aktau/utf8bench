@@ -39,7 +39,7 @@ static inline uint32_t utf8_decode(uint32_t* state, uint32_t* codep, uint32_t by
   return *state;
 }
 
-int bjorn2CountCodePoints(const uint8_t* s, size_t* count) {
+int bjorn_reduced_count(const uint8_t* s, size_t* count) {
   uint32_t codepoint;
   uint32_t state = 0;
 

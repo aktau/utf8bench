@@ -4,11 +4,11 @@
 #include <string.h>
 #include <stdbool.h>
 
-int bjorn1CountCodePoints(const uint8_t* s, size_t* count);
-int bjorn2CountCodePoints(const uint8_t* s, size_t* count);
-int cmpArithCountCodePoints(const uint8_t *s, size_t *count);
-int cmpBranchCountCodePoints(const uint8_t *s, size_t *count);
-int vimCountCodePoints(const uint8_t* s, size_t* count);
+int bjorn_regular_count(const uint8_t* s, size_t* count);
+int bjorn_reduced_count(const uint8_t* s, size_t* count);
+int campbell_arith_count(const uint8_t *s, size_t *count);
+int campbell_branch_count(const uint8_t *s, size_t *count);
+int vim_count(const uint8_t* s, size_t* count);
 
 typedef int (cpcountfn)(const uint8_t *s, size_t *count);
 
@@ -123,7 +123,7 @@ void print_results(const struct result *results, size_t num, uint32_t mode) {
             dtos(res.bytes_per_codepoint, bytes_per_codepoint_str, sizeof(bytes_per_codepoint_str));
             dtos(res.mb_per_sec, mb_per_sec_str, sizeof(mb_per_sec_str));
 
-            printf("%-15s| %-25s| %s | %s | %s\n",
+            printf("%-15s| %-25s| %s ms | %s | %s\n",
                 wrapstring(res.file, "**", sizeof(res.file)),
                 wrapstring(res.method, "**", sizeof(res.method)),
                 wrapstring(runtime_str, "**", sizeof(runtime_str)),
@@ -158,11 +158,11 @@ int main(int argc, char **argv) {
         cpcountfn *fn;
         const char *name;
     } xfns[] = {
-        X(bjorn1CountCodePoints),
-        X(bjorn2CountCodePoints),
-        X(cmpArithCountCodePoints),
-        X(cmpBranchCountCodePoints),
-        X(vimCountCodePoints)
+        X(bjorn_regular_count),
+        X(bjorn_reduced_count),
+        X(campbell_arith_count),
+        X(campbell_branch_count),
+        X(vim_count)
     };
 
     for (size_t f = 0; f < NELEM(files); ++f) {

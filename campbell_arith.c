@@ -59,7 +59,7 @@ utf8_decode_step(uint8_t state, uint8_t octet, uint32_t *cpp)
         (utf8_statetab[class] >> (4 * (state & 7)))));
 }
 
-int cmpArithCountCodePoints(const uint8_t *s, size_t *count) {
+int campbell_arith_count(const uint8_t *s, size_t *count) {
     uint8_t state = UTF8_ACCEPT;
     uint32_t codepoint = 0;
 

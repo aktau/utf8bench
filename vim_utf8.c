@@ -6,7 +6,7 @@ typedef uint8_t char_u;
 
 int mb_cptr2char_adv(const char_u **pp);
 
-int vimCountCodePoints(const uint8_t* s, size_t* count) {
+int vim_count(const uint8_t* s, size_t* count) {
   uint32_t codepoint = 0;
 
   *count = 0;
