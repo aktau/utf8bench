@@ -28,7 +28,7 @@ debug: $(EXECUTABLE)
 release: CFLAGS += $(CFLAGS_RELEASE)
 release: $(EXECUTABLE)
 
-$(EXECUTABLE): bjorn.o bjorn2.o utf8.o bench.o
+$(EXECUTABLE): bjorn.o bjorn2.o vim_utf8.o bench.o
 	$(CC) $^ -o $@ $(CFLAGS)
 
 # when looking for something that ends in .o, look
