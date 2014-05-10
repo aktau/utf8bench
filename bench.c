@@ -14,13 +14,12 @@ typedef int (cpcountfn)(const uint8_t *s, size_t *count);
 #define X(fn) \
     { fn, #fn }
 
-void __attribute__ ((noinline)) bench_fn(const char *name, const uint8_t *buf, const char *funname, cpcountfn fn) {
+void __attribute__ ((noinline)) bench_fn(const char *name, int it, const uint8_t *buf, const char *funname, cpcountfn fn) {
     struct timeval t1, t2;
     double elapsedTime;
-    int iterations = 8000;
     gettimeofday(&t1, NULL);
     size_t cnt = 0xDEAD;
-    for (int i = 0; i < iterations; ++i) {
+    for (int i = 0; i < it; ++i) {
         fn(buf, &cnt);
     }
     gettimeofday(&t2, NULL); \
@@ -45,9 +44,12 @@ char *readf(const char *fname) {
 }
 
 int main() {
-    const char *fnames[] = {
-        "text/utf8.txt",
-        "text/ascii.txt"
+    struct {
+        const char *name;
+        int iterations;
+    } files[] = {
+        { "text/utf8.txt", 4000 },
+        { "text/ascii.txt", 4000 }
     };
 
     struct {
@@ -61,10 +63,12 @@ int main() {
         X(vimCountCodePoints)
     };
 
-    for (size_t f = 0; f < NELEM(fnames); ++f) {
-        char *buf = readf(fnames[f]);
+    for (size_t f = 0; f < NELEM(files); ++f) {
+        char *buf = readf(files[f].name);
         for (size_t i = 0; i < NELEM(xfns); ++i) {
-            bench_fn(fnames[f], (uint8_t *) buf, xfns[i].name, xfns[i].fn);
+            bench_fn(files[f].name, files[f].iterations,
+                (uint8_t *) buf,
+                xfns[i].name, xfns[i].fn);
         }
         free(buf);
     }

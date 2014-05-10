@@ -1,3 +1,4 @@
 bench
 *.o
+text/enwik8.txt
 
