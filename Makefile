@@ -1,6 +1,6 @@
 # if $CC is not set, use gcc as a sensible default
 CC ?= clang
-EXECUTABLE := bench
+EXECUTABLE := utf8bench
 
 # if $CFLAGS is not set, be very pedantic and compile
 # as C11, that should catch some common errors, also
@@ -28,7 +28,7 @@ debug: $(EXECUTABLE)
 release: CFLAGS += $(CFLAGS_RELEASE)
 release: $(EXECUTABLE)
 
-$(EXECUTABLE): bjorn.o bjorn2.o campbell_branch.o campbell_arith.o vim_utf8.o bench.o
+$(EXECUTABLE): bjorn.o bjorn2.o campbell_branch.o campbell_arith.o vim_utf8.o utf8bench.o
 	$(CC) $^ -o $@ $(CFLAGS)
 
 # when looking for something that ends in .o, look

@@ -11,10 +11,10 @@ fi
 function run() {
     make clean > /dev/null
     make debug
-    ./bench $arg
+    ./utf8bench $arg
     make clean > /dev/null
     make release
-    ./bench $arg
+    ./utf8bench $arg
 }
 
 export CC=gcc-4.9 && run
