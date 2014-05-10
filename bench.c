@@ -14,7 +14,12 @@ typedef int (cpcountfn)(const uint8_t *s, size_t *count);
 #define X(fn) \
     { fn, #fn }
 
-void __attribute__ ((noinline)) bench_fn(const char *name, int it, const uint8_t *buf, const char *funname, cpcountfn fn) {
+void bench_fn(const char *name,
+              int it,
+              long fsize,
+              const uint8_t *buf,
+              const char *funname,
+              cpcountfn fn) {
     struct timeval t1, t2;
     double elapsedTime;
     gettimeofday(&t1, NULL);
@@ -25,24 +30,26 @@ void __attribute__ ((noinline)) bench_fn(const char *name, int it, const uint8_t
     gettimeofday(&t2, NULL); \
     elapsedTime = (t2.tv_sec - t1.tv_sec) * 1000.0;
     elapsedTime += (t2.tv_usec - t1.tv_usec) / 1000.0;
-    printf("%-15s|   %-25s|   %6.1f ms (count = %zu)\n", name, funname, elapsedTime, cnt);
+    printf("%-15s|   %-25s|   %6.1f ms (bytes = %9ld, cps = %9zu)\n", name, funname, elapsedTime, fsize, cnt);
 }
 
-char *readf(const char *fname) {
+char *readf(const char *fname, long *fsize) {
     FILE *f = fopen(fname, "rb");
     if (f == NULL) {
         return NULL;
     }
 
     fseek(f, 0, SEEK_END);
-    long fsize = ftell(f);
+    long size = ftell(f);
     rewind(f);
 
-    char *buf = malloc(fsize + 1);
-    fread(buf, fsize, 1, f);
+    char *buf = malloc(size + 1);
+    fread(buf, size, 1, f);
     fclose(f);
 
-    buf[fsize] = 0;
+    buf[size] = 0;
+
+    *fsize = size;
 
     return buf;
 }
@@ -69,12 +76,13 @@ int main() {
     };
 
     for (size_t f = 0; f < NELEM(files); ++f) {
-        char *buf = readf(files[f].name);
+        long fsize = 0;
+        char *buf = readf(files[f].name, &fsize);
         if (!buf) {
             continue;
         }
         for (size_t i = 0; i < NELEM(xfns); ++i) {
-            bench_fn(files[f].name, files[f].iterations,
+            bench_fn(files[f].name, files[f].iterations, fsize,
                 (uint8_t *) buf,
                 xfns[i].name, xfns[i].fn);
         }
