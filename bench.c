@@ -33,8 +33,9 @@ void bench_fn(const char *name,
     double mb = (((double)fsize) / 1024.0 / 1024.0) * it;
     double sec = elapsedTime / 1000.0;
     double mbsec = mb / sec;
-    printf("%-15s|   %-25s|   %6.1f ms (bytes = %9ld, cps = %9zu, mb/sec = %3.1f)\n",
-            name, funname, elapsedTime, fsize, cnt, mbsec);
+    double bytes_codepoint_ratio = ((double)fsize) / (double)cnt;
+    printf("%-15s| %-25s| %6.1f ms | %15.1f | %3.1f\n",
+            name, funname, elapsedTime, bytes_codepoint_ratio, mbsec);
 }
 
 char *readf(const char *fname, long *fsize) {
@@ -79,6 +80,8 @@ int main() {
         X(vimCountCodePoints)
     };
 
+    printf("file           | function                 | runtime   | bytes/codepoint | mb/sec\n");
+    printf("---------------|--------------------------|-----------|-----------------|-------\n");
     for (size_t f = 0; f < NELEM(files); ++f) {
         long fsize = 0;
         char *buf = readf(files[f].name, &fsize);
@@ -92,6 +95,7 @@ int main() {
         }
         free(buf);
     }
+    printf("---------------|--------------------------|-----------|-----------------|-------\n");
 
     return 0;
 }
