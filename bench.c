@@ -30,7 +30,11 @@ void bench_fn(const char *name,
     gettimeofday(&t2, NULL); \
     elapsedTime = (t2.tv_sec - t1.tv_sec) * 1000.0;
     elapsedTime += (t2.tv_usec - t1.tv_usec) / 1000.0;
-    printf("%-15s|   %-25s|   %6.1f ms (bytes = %9ld, cps = %9zu)\n", name, funname, elapsedTime, fsize, cnt);
+    double mb = (((double)fsize) / 1024.0 / 1024.0) * it;
+    double sec = elapsedTime / 1000.0;
+    double mbsec = mb / sec;
+    printf("%-15s|   %-25s|   %6.1f ms (bytes = %9ld, cps = %9zu, mb/sec = %3.1f)\n",
+            name, funname, elapsedTime, fsize, cnt, mbsec);
 }
 
 char *readf(const char *fname, long *fsize) {
