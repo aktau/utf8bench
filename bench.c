@@ -6,6 +6,8 @@
 
 int countCodePoints(const uint8_t* s, size_t* count);
 int optCountCodePoints(const uint8_t* s, size_t* count);
+int cmpArithCountCodePoints(const uint8_t *s, size_t *count);
+int cmpBranchCountCodePoints(const uint8_t *s, size_t *count);
 int vimCountCodePoints(const uint8_t* s, size_t* count);
 
 /* if (fn(buf, &cnt)) { \ */
@@ -55,6 +57,8 @@ int main() {
 
     BENCH("multibyte: ", (uint8_t *) buf, countCodePoints);
     BENCH("multibyte: ", (uint8_t *) buf, optCountCodePoints);
+    BENCH("multibyte: ", (uint8_t *) buf, cmpArithCountCodePoints);
+    BENCH("multibyte: ", (uint8_t *) buf, cmpBranchCountCodePoints);
     BENCH("multibyte: ", (uint8_t *) buf, vimCountCodePoints);
 
     free(buf);
@@ -63,6 +67,8 @@ int main() {
 
     BENCH("ascii:     ", (uint8_t *) buf, countCodePoints);
     BENCH("ascii:     ", (uint8_t *) buf, optCountCodePoints);
+    BENCH("ascii:     ", (uint8_t *) buf, cmpArithCountCodePoints);
+    BENCH("ascii:     ", (uint8_t *) buf, cmpBranchCountCodePoints);
     BENCH("ascii:     ", (uint8_t *) buf, vimCountCodePoints);
 
     free(buf);

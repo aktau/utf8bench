@@ -17,4 +17,5 @@ Implementations
 ===============
 
 - vim's
-- [Björn Höhrmann's version](http://bjoern.hoehrmann.de/utf-8/decoder/dfa/)
+- [Björn Höhrmann's versions](http://bjoern.hoehrmann.de/utf-8/decoder/dfa/)
+- [Taylor R. Campbell's versions](https://github.com/hoehrmann/utf-8-misc)
