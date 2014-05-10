@@ -87,18 +87,52 @@ int cmp_results(const void * a, const void * b) {
   return r2->mb_per_sec - r1->mb_per_sec;
 }
 
+char *wrapstring(char *buf, char *wrapper, size_t max) {
+    char tmp[MAX_NAME_SIZE] = {0};
+
+    size_t len = strlen(buf);
+    size_t wraplen = strlen(wrapper);
+    size_t buflen = len + 2 * wraplen;
+    if (len >= MAX_NAME_SIZE || buflen >= max) {
+        return buf;
+    }
+
+    strncpy(tmp, buf, sizeof(tmp));
+    memcpy(buf, wrapper, wraplen);
+    memcpy(buf + wraplen, tmp, len);
+    memcpy(buf + wraplen + len, wrapper, wraplen + 1);
+
+    return buf;
+}
+
+char *dtos(double num, char *buf, size_t len) {
+   snprintf(buf, len, "%.1f", num);
+   return buf;
+}
+
 void print_results(const struct result *results, size_t num, uint32_t mode) {
     printf("file           | function                 | runtime   | bytes/codepoint | mb/sec\n");
     printf("---------------|--------------------------|-----------|-----------------|-------\n");
     for (size_t i = 0; i < num; ++i) {
-        const struct result *res = &results[i];
+        struct result res = results[i];
         if (mode & MODE_GITHUB && i == 0) {
-            printf("**%-15s**| **%-25s**| **%6.1f ms** | **%15.1f** | **%3.1f**\n",
-                res->file, res->method, res->runtime, res->bytes_per_codepoint, res->mb_per_sec);
+            char runtime_str[MAX_NAME_SIZE];
+            char bytes_per_codepoint_str[MAX_NAME_SIZE];
+            char mb_per_sec_str[MAX_NAME_SIZE];
+            dtos(res.runtime, runtime_str, sizeof(runtime_str));
+            dtos(res.bytes_per_codepoint, bytes_per_codepoint_str, sizeof(bytes_per_codepoint_str));
+            dtos(res.mb_per_sec, mb_per_sec_str, sizeof(mb_per_sec_str));
+
+            printf("%-15s| %-25s| %s | %s | %s\n",
+                wrapstring(res.file, "**", sizeof(res.file)),
+                wrapstring(res.method, "**", sizeof(res.method)),
+                wrapstring(runtime_str, "**", sizeof(runtime_str)),
+                wrapstring(bytes_per_codepoint_str, "**", sizeof(bytes_per_codepoint_str)),
+                wrapstring(mb_per_sec_str, "**", sizeof(mb_per_sec_str)));
         }
         else {
             printf("%-15s| %-25s| %6.1f ms | %15.1f | %3.1f\n",
-                res->file, res->method, res->runtime, res->bytes_per_codepoint, res->mb_per_sec);
+                res.file, res.method, res.runtime, res.bytes_per_codepoint, res.mb_per_sec);
         }
     }
 }
