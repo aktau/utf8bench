@@ -7,7 +7,7 @@ typedef uint8_t char_u;
 int mb_cptr2char_adv(const char_u **pp);
 
 int vimCountCodePoints(const uint8_t* s, size_t* count) {
-  uint32_t codepoint;
+  uint32_t codepoint = 0;
 
   *count = 0;
   while (*s) {
@@ -15,7 +15,7 @@ int vimCountCodePoints(const uint8_t* s, size_t* count) {
     *count += 1;
   }
 
-  return 0;
+  return codepoint != 0;
 }
 
 /* Lookup table to quickly get the length in bytes of a UTF-8 character from
