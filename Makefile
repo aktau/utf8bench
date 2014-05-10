@@ -8,7 +8,7 @@ EXECUTABLE := utf8bench
 CFLAGS ?= -Wall -Wextra -pedantic -std=c11
 
 CFLAGS_DEBUG := -g3 \
-	-O \
+	-O1 \
 	-DDEBUG
 
 CFLAGS_RELEASE := -O2 \
@@ -25,7 +25,7 @@ debug: $(EXECUTABLE)
 
 # when the target is release,
 # add CFLAGS_RELEASE to CFLAGS
-release: CFLAGS += $(CFLAGS_RELEASE)
+release: CFLAGS += $(CFLAGS_RELEASE) -g3 -ggdb
 release: $(EXECUTABLE)
 
 $(EXECUTABLE): bjorn.o bjorn2.o campbell_branch.o campbell_arith.o vim_utf8.o utf8bench.o
