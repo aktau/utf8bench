@@ -3,13 +3,18 @@
 set -e
 set -u
 
+arg=
+if [ "$#" -ne 0 ]; then
+    arg="1"
+fi
+
 function run() {
     make clean > /dev/null
     make debug
-    ./bench
+    ./bench $arg
     make clean > /dev/null
     make release
-    ./bench
+    ./bench $arg
 }
 
 export CC=gcc-4.9 && run
