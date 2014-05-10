@@ -31,39 +31,51 @@ Clang 3.4
 
 file           | function                 | runtime   | bytes/codepoint | mb/sec
 ---------------|--------------------------|-----------|-----------------|-------
-text/utf8.txt  | bjorn1CountCodePoints    |   38.0 ms |             2.3 | 164.9
-text/utf8.txt  | bjorn2CountCodePoints    |   27.7 ms |             2.3 | 226.8
-text/utf8.txt  | cmpArithCountCodePoints  |   39.0 ms |             2.3 | 161.0
-text/utf8.txt  | cmpBranchCountCodePoints |   24.7 ms |             2.3 | 253.7
-text/utf8.txt  | vimCountCodePoints       |   20.7 ms |             2.3 | 303.6
-text/ascii.txt | bjorn1CountCodePoints    |  191.1 ms |             1.0 | 230.0
-text/ascii.txt | bjorn2CountCodePoints    |  184.4 ms |             1.0 | 238.4
-text/ascii.txt | cmpArithCountCodePoints  |  267.3 ms |             1.0 | 164.5
-text/ascii.txt | cmpBranchCountCodePoints |   98.0 ms |             1.0 | 448.7
-text/ascii.txt | vimCountCodePoints       |  236.9 ms |             1.0 | 185.6
-text/enwik8.txt| bjorn1CountCodePoints    |  405.9 ms |             1.0 | 235.0
-text/enwik8.txt| bjorn2CountCodePoints    |  408.4 ms |             1.0 | 233.5
-text/enwik8.txt| cmpArithCountCodePoints  |  600.2 ms |             1.0 | 158.9
-text/enwik8.txt| cmpBranchCountCodePoints |  224.0 ms |             1.0 | 425.8
-text/enwik8.txt| vimCountCodePoints       |  526.9 ms |             1.0 | 181.0
+text/utf8.txt  | bjorn1CountCodePoints    |   29.0 ms |             2.3 | 216.4
+text/utf8.txt  | bjorn2CountCodePoints    |   29.1 ms |             2.3 | 215.3
+text/utf8.txt  | cmpArithCountCodePoints  |   44.1 ms |             2.3 | 142.3
+text/utf8.txt  | cmpBranchCountCodePoints |   25.5 ms |             2.3 | 246.2
+text/utf8.txt  | vimCountCodePoints       |   22.1 ms |             2.3 | 284.4
+
+file           | function                 | runtime   | bytes/codepoint | mb/sec
+---------------|--------------------------|-----------|-----------------|-------
+text/ascii.txt | bjorn1CountCodePoints    |  191.8 ms |             1.0 | 229.2
+text/ascii.txt | bjorn2CountCodePoints    |  184.1 ms |             1.0 | 238.8
+text/ascii.txt | cmpArithCountCodePoints  |  279.6 ms |             1.0 | 157.2
+text/ascii.txt | cmpBranchCountCodePoints |  100.2 ms |             1.0 | 438.8
+text/ascii.txt | vimCountCodePoints       |  244.1 ms |             1.0 | 180.1
+
+file           | function                 | runtime   | bytes/codepoint | mb/sec
+---------------|--------------------------|-----------|-----------------|-------
+text/enwik8.txt| bjorn1CountCodePoints    |  400.6 ms |             1.0 | 238.0
+text/enwik8.txt| bjorn2CountCodePoints    |  416.1 ms |             1.0 | 229.2
+text/enwik8.txt| cmpArithCountCodePoints  |  595.1 ms |             1.0 | 160.3
+text/enwik8.txt| cmpBranchCountCodePoints |  218.5 ms |             1.0 | 436.4
+text/enwik8.txt| vimCountCodePoints       |  519.1 ms |             1.0 | 183.7
 
 Gcc 4.9
 -------
 
 file           | function                 | runtime   | bytes/codepoint | mb/sec
 ---------------|--------------------------|-----------|-----------------|-------
-text/utf8.txt  | bjorn1CountCodePoints    |   22.2 ms |             2.3 | 281.9
-text/utf8.txt  | bjorn2CountCodePoints    |   23.6 ms |             2.3 | 265.9
-text/utf8.txt  | cmpArithCountCodePoints  |   31.1 ms |             2.3 | 202.0
-text/utf8.txt  | cmpBranchCountCodePoints |   28.0 ms |             2.3 | 223.7
-text/utf8.txt  | vimCountCodePoints       |   28.2 ms |             2.3 | 222.2
-text/ascii.txt | bjorn1CountCodePoints    |  132.3 ms |             1.0 | 332.4
-text/ascii.txt | bjorn2CountCodePoints    |  150.4 ms |             1.0 | 292.3
-text/ascii.txt | cmpArithCountCodePoints  |  215.9 ms |             1.0 | 203.6
-text/ascii.txt | cmpBranchCountCodePoints |  108.5 ms |             1.0 | 405.1
-text/ascii.txt | vimCountCodePoints       |  343.9 ms |             1.0 | 127.8
-text/enwik8.txt| bjorn1CountCodePoints    |  301.1 ms |             1.0 | 316.7
-text/enwik8.txt| bjorn2CountCodePoints    |  330.7 ms |             1.0 | 288.4
-text/enwik8.txt| cmpArithCountCodePoints  |  464.1 ms |             1.0 | 205.5
-text/enwik8.txt| cmpBranchCountCodePoints |  239.1 ms |             1.0 | 398.9
-text/enwik8.txt| vimCountCodePoints       |  736.7 ms |             1.0 | 129.5
+text/utf8.txt  | bjorn1CountCodePoints    |   20.9 ms |             2.3 | 299.4
+text/utf8.txt  | bjorn2CountCodePoints    |   24.0 ms |             2.3 | 261.2
+text/utf8.txt  | cmpArithCountCodePoints  |   33.2 ms |             2.3 | 189.1
+text/utf8.txt  | cmpBranchCountCodePoints |   29.7 ms |             2.3 | 211.5
+text/utf8.txt  | vimCountCodePoints       |   28.6 ms |             2.3 | 219.2
+
+file           | function                 | runtime   | bytes/codepoint | mb/sec
+---------------|--------------------------|-----------|-----------------|-------
+text/ascii.txt | bjorn1CountCodePoints    |  136.6 ms |             1.0 | 321.7
+text/ascii.txt | bjorn2CountCodePoints    |  153.4 ms |             1.0 | 286.6
+text/ascii.txt | cmpArithCountCodePoints  |  208.9 ms |             1.0 | 210.4
+text/ascii.txt | cmpBranchCountCodePoints |  108.6 ms |             1.0 | 404.9
+text/ascii.txt | vimCountCodePoints       |  337.8 ms |             1.0 | 130.1
+
+file           | function                 | runtime   | bytes/codepoint | mb/sec
+---------------|--------------------------|-----------|-----------------|-------
+text/enwik8.txt| bjorn1CountCodePoints    |  310.4 ms |             1.0 | 307.2
+text/enwik8.txt| bjorn2CountCodePoints    |  335.2 ms |             1.0 | 284.5
+text/enwik8.txt| cmpArithCountCodePoints  |  484.5 ms |             1.0 | 196.8
+text/enwik8.txt| cmpBranchCountCodePoints |  239.2 ms |             1.0 | 398.7
+text/enwik8.txt| vimCountCodePoints       |  725.9 ms |             1.0 | 131.4
