@@ -80,9 +80,9 @@ int main() {
         X(vimCountCodePoints)
     };
 
-    printf("file           | function                 | runtime   | bytes/codepoint | mb/sec\n");
-    printf("---------------|--------------------------|-----------|-----------------|-------\n");
     for (size_t f = 0; f < NELEM(files); ++f) {
+        printf("file           | function                 | runtime   | bytes/codepoint | mb/sec\n");
+        printf("---------------|--------------------------|-----------|-----------------|-------\n");
         long fsize = 0;
         char *buf = readf(files[f].name, &fsize);
         if (!buf) {
@@ -94,8 +94,8 @@ int main() {
                 xfns[i].name, xfns[i].fn);
         }
         free(buf);
+        printf("\n");
     }
-    printf("---------------|--------------------------|-----------|-----------------|-------\n");
 
     return 0;
 }
