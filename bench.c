@@ -46,8 +46,8 @@ char *readf(const char *fname) {
 
 int main() {
     const char *fnames[] = {
-        "text.txt",
-        "normal.txt"
+        "text/utf8.txt",
+        "text/ascii.txt"
     };
 
     struct {
