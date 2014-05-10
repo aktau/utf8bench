@@ -30,6 +30,10 @@ void __attribute__ ((noinline)) bench_fn(const char *name, int it, const uint8_t
 
 char *readf(const char *fname) {
     FILE *f = fopen(fname, "rb");
+    if (f == NULL) {
+        return NULL;
+    }
+
     fseek(f, 0, SEEK_END);
     long fsize = ftell(f);
     rewind(f);
@@ -49,7 +53,8 @@ int main() {
         int iterations;
     } files[] = {
         { "text/utf8.txt", 4000 },
-        { "text/ascii.txt", 4000 }
+        { "text/ascii.txt", 4000 },
+        { "text/enwik8.txt", 1 }
     };
 
     struct {
@@ -65,6 +70,9 @@ int main() {
 
     for (size_t f = 0; f < NELEM(files); ++f) {
         char *buf = readf(files[f].name);
+        if (!buf) {
+            continue;
+        }
         for (size_t i = 0; i < NELEM(xfns); ++i) {
             bench_fn(files[f].name, files[f].iterations,
                 (uint8_t *) buf,
