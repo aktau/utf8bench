@@ -150,6 +150,7 @@ int main(int argc, char **argv) {
         int iterations;
     } files[] = {
         { "text/utf8.txt", 4000 },
+        { "text/4byte.txt", 500 },
         { "text/ascii.txt", 4000 },
         { "text/enwik8.txt", 1 }
     };
