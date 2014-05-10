@@ -4,7 +4,7 @@
 typedef uint8_t char_u;
 #define NUL '\0'
 
-int mb_cptr2char_adv(const char_u **pp);
+static int mb_cptr2char_adv(const char_u **pp);
 
 int vim_count(const uint8_t* s, size_t* count) {
   uint32_t codepoint = 0;
@@ -52,7 +52,7 @@ static char utf8len_tab_zero[256] =
  * returned.
  * Does not include composing characters, of course.
  */
-int utf_ptr2char(const char_u *p)
+static int utf_ptr2char(const char_u *p)
 {
   int len;
 
@@ -95,7 +95,7 @@ int utf_ptr2char(const char_u *p)
  * Returns 0 for "".
  * Returns 1 for an illegal byte sequence.
  */
-int utf_ptr2len(const char_u *p)
+static int utf_ptr2len(const char_u *p)
 {
   int len;
   int i;
@@ -119,7 +119,7 @@ int utf_ptr2len(const char_u *p)
  * Get character at **pp and advance *pp to the next character.
  * Note: composing characters are returned as separate characters.
  */
-int mb_cptr2char_adv(const char_u **pp)
+static int mb_cptr2char_adv(const char_u **pp)
 {
   int c;
 
